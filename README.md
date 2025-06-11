@@ -10,6 +10,6 @@ resources demonstrates its potential to an educational tool upon complete develo
 The chatbot successfully integrates advanced AI features to manage conversations, under-
 stand user inputs, and generate relevant responses. It also incorporates comprehensive
 educational content modules, including tutorials, quizzes, case studies, and supplementary
-resources, enhancing the overall learning experience. The final report for the project can be found at 
+resources, enhancing the overall learning experience. The final report for the project can be found at [Report PDF](https://github.com/kondaveetitejaswi/ai_and_cybersecurity_educational_chatbot/blob/main/Summer_Internship_Final_Project_Report.pdf).
 ![Slide1](https://github.com/user-attachments/assets/d28e4f20-ad66-4313-81bd-188dc7d3e95a)
 The above image depicts the ChatBot functionality overview.
