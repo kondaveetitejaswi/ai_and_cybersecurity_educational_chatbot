@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        #chat-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #chat-log {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .user-message {
+            text-align: right;
+            color: #007BFF;
+        }
+        .bot-message {
+            text-align: left;
+            color: #333;
+        }
+        #user_input {
+            width: calc(100% - 60px);
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #send_button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h1>Chat with the Bot</h1>
+        <div id="chat-log"></div>
+        <input type="text" id="user_input" placeholder="Type your message here..." />
+        <button id="send_button" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById("user_input").value;
+            if (userInput.trim() === "") return;
+            
+            appendMessage(userInput, 'user-message');
+            document.getElementById("user_input").value = "";
+
+            fetch(`/get?msg=${encodeURIComponent(userInput)}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    appendMessage(data.response, 'bot-message');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    appendMessage("An error occurred. Please try again.", 'bot-message');
+                });
+        }
+
+        function appendMessage(text, className) {
+            const chatLog = document.getElementById("chat-log");
+            const messageDiv = document.createElement("div");
+            messageDiv.className = `message ${className}`;
+            messageDiv.innerHTML = text;  // Use innerHTML to render HTML content
+            chatLog.appendChild(messageDiv);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+    </script>
+</body>
+</html>
